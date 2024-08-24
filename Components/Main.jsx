@@ -7,11 +7,13 @@ import {
   ActivityIndicator,
   FlatList,
   Animated,
+  Pressable,
 } from "react-native";
 import { styles } from "../AppStyles";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AnimatedContent } from "./AnimatedContent";
 import Score from "./Score";
+import { Link } from "expo-router";
 
 export default function Main() {
   const [games, setGames] = useState([]);
@@ -26,14 +28,14 @@ export default function Main() {
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      <Link isChild href={"/about"}>
+        <Pressable>
+          <Text>Ir al about</Text>
+        </Pressable>
+      </Link>
       {games.length === 0 ? (
         <ActivityIndicator size="large" />
       ) : (
-        // <ScrollView>
-        //   {games.map((game) => (
-        //     <GameCard key={game.slug} game={game} />
-        //   ))}
-        // </ScrollView>
         <FlatList
           data={games}
           keyExtractor={(game) => game.slug}
